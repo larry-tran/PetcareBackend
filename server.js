@@ -7,6 +7,7 @@ const imageUploader = require('./helpers/image-uploader');
 var app = express();
 
 app.use(cors());
+app.use('/uploads', express.static('uploads'));
 
 app.post(
   "/upload",imageUploader.upload.single("upload"),
@@ -18,13 +19,13 @@ app.post(
   }
 );
 
-app.get("/uploads/:upload", function (req, res) {
-  file = req.params.upload;
-  console.log(req.params.upload);
-  var img = fs.readFileSync(__dirname + "/uploads/" + file);
-  res.writeHead(200, { "Content-Type": "image/*" });
-  res.end(img, "binary");
-});
+// app.get("/uploads/:upload", function (req, res) {
+//   file = req.params.upload;
+//   console.log(req.params.upload);
+//   var img = fs.readFileSync(__dirname + "/uploads/" + file);
+//   res.writeHead(200, { "Content-Type": "image/*" });
+//   res.end(img, "binary");
+// });
 
 
 const port = process.env.PORT || 80;
